@@ -1,0 +1,4 @@
+<p>Epoch Time: <%= Time.current.to_i %></p>
+<%= turbo_frame_tag('text-container') do %>
+  <%= render partial: 'homepage/text', locals: { text: @text } %>
+<% end %>
