@@ -38,6 +38,19 @@ class TodosController < ApplicationController
   end
 
   def update
+    if @todo.update(todo_params)
+      respond_to do |f|
+        f.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(
+              "todo_#{@todo.id}",
+              partial: 'todos/todo',
+              locals: { todo: @todo }
+            )
+          ]
+        end
+      end
+    end
   end
 
   def destroy
