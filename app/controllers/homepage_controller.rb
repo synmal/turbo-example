@@ -1,5 +1,6 @@
 class HomepageController < ApplicationController
   def show
+    @todos = Todo.all.order(created_at: :desc)
     @text = params[:text]
 
     respond_to do |format|

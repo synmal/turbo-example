@@ -4,3 +4,7 @@
 <% end %>
 
 <%= render partial: 'todos/new' %>
+
+<%= turbo_frame_tag('todos-container', class: 'd-flex gap-2 mt-3') do %>
+  <%= render partial: 'todos/todo', collection: @todos, as: :todo %>
+<% end %>
