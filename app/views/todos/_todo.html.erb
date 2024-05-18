@@ -1,5 +1,19 @@
 <%= content_tag :div, class: 'card' do %>
   <%= content_tag :div, class: 'card-body' do %>
-    <%= todo.description %>
+    <%= content_tag :div, class: 'd-flex gap-2 align-items-center' do %>
+      <div><%= todo.description %></div>
+      <div class="dropdown">
+        <%= link_to "javascript:void(0)", class: 'text-secondary', id: "todo_#{todo.id}_actions", data: { bs_toggle: "dropdown" },  "aria-expanded" => false do %>
+          <i class="fa-solid fa-chevron-down"></i>
+        <% end %>
+        <ul class="dropdown-menu" aria-labelledby="todo_<%= todo.id %>_actions">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+
+
+    <% end %>
   <% end %>
 <% end %>
