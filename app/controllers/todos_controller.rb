@@ -1,4 +1,6 @@
 class TodosController < ApplicationController
+  before_action :set_todo
+
   def new
   end
 
@@ -22,6 +24,17 @@ class TodosController < ApplicationController
   end
 
   def edit
+    respond_to do |f|
+      f.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update(
+            "todo_#{@todo.id}",
+            partial: 'todos/edit',
+            locals: { todo: @todo }
+          )
+        ]
+      end
+    end
   end
 
   def update
@@ -33,5 +46,9 @@ class TodosController < ApplicationController
   private
     def todo_params
       params.require(:todo).permit(:description)
+    end
+
+    def set_todo
+      @todo = Todo.find(params[:id])
     end
 end

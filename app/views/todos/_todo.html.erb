@@ -1,4 +1,4 @@
-<%= content_tag :div, class: 'card' do %>
+<%= turbo_frame_tag dom_id(todo), class: 'card' do %>
   <%= content_tag :div, class: 'card-body' do %>
     <%= content_tag :div, class: 'd-flex gap-2 align-items-center' do %>
       <div><%= todo.description %></div>
@@ -7,13 +7,10 @@
           <i class="fa-solid fa-chevron-down"></i>
         <% end %>
         <ul class="dropdown-menu" aria-labelledby="todo_<%= todo.id %>_actions">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li><%= link_to 'Edit', edit_todo_path(id: todo.id), class: 'dropdown-item', data: { turbo_prefetch: false, turbo_stream: true } %></li>
+          <li><%= link_to 'Delete', edit_todo_path(id: todo.id), class: 'dropdown-item', data: { turbo_prefetch: false, turbo_stream: true } %></li>
         </ul>
       </div>
-
-
     <% end %>
   <% end %>
 <% end %>
