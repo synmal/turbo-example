@@ -1,10 +1,10 @@
-<p>Epoch Time: <%= Time.current.to_i %></p>
-<%= turbo_frame_tag('text-container') do %>
-  <%= render partial: 'homepage/text', locals: { text: @text } %>
-<% end %>
-
-<%= render partial: 'todos/new' %>
-
-<%= turbo_frame_tag('todos-container', class: 'd-flex gap-2 mt-3') do %>
-  <%= render partial: 'todos/todo', collection: @todos, as: :todo %>
+<%= turbo_frame_tag('homepage') do %>
+  <%= content_tag :div, data: { controller: 'loader', loader_target: 'container' }, class: "homepage--container" do %>
+    <%= render partial: 'todos/new' %>
+    <%= turbo_frame_tag('todos-container', class: 'd-flex gap-2 mt-3', src: todos_path(format: :turbo_stream)) do %>
+      <%= content_tag :div, class: 'align-self-center mx-auto' do %>
+        <i class="fa-solid fa-circle-notch fa-spin fa-2xl"></i>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>

@@ -1,6 +1,25 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: %i( edit update destroy )
 
+  def index
+    sleep 1
+    respond_to do |format|
+      todos = Todo.all.order(created_at: :desc)
+
+      # todos-container
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update(
+            "todos-container",
+            partial: 'todos/todo',
+            collection: todos,
+            as: :todo
+          )
+        ]
+      end
+    end
+  end
+
   def new
   end
 
