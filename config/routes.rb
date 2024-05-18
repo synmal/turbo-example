@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root "homepage#show"
+
+  resources :todos, only: %i( new create edit udpate destroy )
 end
