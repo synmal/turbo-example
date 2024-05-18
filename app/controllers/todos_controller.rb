@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo
+  before_action :set_todo, only: %i( edit update destroy )
 
   def new
   end
@@ -54,6 +54,15 @@ class TodosController < ApplicationController
   end
 
   def destroy
+    @todo.destroy
+
+    respond_to do |f|
+      f.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("todo_#{@todo.id}")
+        ]
+      end
+    end
   end
 
   private

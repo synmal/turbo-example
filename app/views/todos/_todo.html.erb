@@ -8,7 +8,7 @@
         <% end %>
         <ul class="dropdown-menu" aria-labelledby="todo_<%= todo.id %>_actions">
           <li><%= link_to 'Edit', edit_todo_path(id: todo.id), class: 'dropdown-item', data: { turbo_prefetch: false, turbo_stream: true } %></li>
-          <li><%= link_to 'Delete', edit_todo_path(id: todo.id), class: 'dropdown-item', data: { turbo_prefetch: false, turbo_stream: true } %></li>
+          <li><%= link_to 'Delete', todo_path(id: todo.id), class: 'dropdown-item', data: { turbo_prefetch: false, turbo_stream: true, turbo_method: :delete } %></li>
         </ul>
       </div>
     <% end %>
