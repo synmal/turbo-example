@@ -1,4 +1,10 @@
-<%= form_with url: todos_path, class: 'd-flex gap-2', model: Todo.new, data: { controller: 'form', form_target: 'form', action: 'turbo:submit-end->form#reset' } do |f| %>
-  <%= f.text_field :description, class: 'form-control', placeholder: 'Todo Description' %>
-  <%= f.submit 'Add Todo', class: 'btn btn-primary' %>
+<%= turbo_frame_tag "new_todo", class: 'card' do %>
+  <%= content_tag :div, class: 'card-body' do %>
+    <%= form_with url: todos_path, class: 'd-flex gap-2', model: Todo.new, data: { controller: 'form', form_target: 'form', action: 'turbo:submit-end->form#reset' } do |f| %>
+      <%= f.text_field :description, class: 'form-control', placeholder: 'Todo Description' %>
+      <%= button_tag class: 'btn btn-primary', type: 'submit' do %>
+        <i class="fa-solid fa-plus"></i>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>

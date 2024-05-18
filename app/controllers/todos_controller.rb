@@ -21,6 +21,16 @@ class TodosController < ApplicationController
   end
 
   def new
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.prepend(
+            "todos-container",
+            partial: 'todos/new'
+          )
+        ]
+      end
+    end
   end
 
   def create
