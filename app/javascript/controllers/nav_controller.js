@@ -1,7 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  static outlets = [ 'loader' ]
+
   showLoader() {
-    console.log('showLoader()')
+    this.loaderOutlet.show()
   }
 }
