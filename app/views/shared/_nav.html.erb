@@ -1,21 +1,21 @@
-<%= turbo_frame_tag "navbar" do %>
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-  <%= link_to "Home", root_path, class: 'navbar-brand', data: { turbo_prefetch: false, turbo_stream: true } %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <%= link_to "Features", root_path(text: 'Features'), class: "nav-link #{ params[:text] == 'Features' ? 'active' : nil }", data: { turbo_prefetch: false, turbo_stream: true } %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Pricing", root_path(text: 'Pricing'), class: "nav-link #{ params[:text] == 'Pricing' ? 'active' : nil }", data: { turbo_prefetch: false, turbo_stream: true } %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "About Us", root_path(text: 'About Us'), class: "nav-link #{ params[:text] == 'About Us' ? 'active' : nil }", data: { turbo_prefetch: false, turbo_stream: true } %>
-      </li>
-    </ul>
-  </div>
-</nav>
+<%= turbo_frame_tag "navbar", data: { controller: 'nav' } do %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+    <%= link_to "Home", root_path, class: 'navbar-brand', data: { turbo_prefetch: false, turbo_stream: true, action: 'click->nav#showLoader' } %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to "Features", root_path(text: 'Features'), class: "nav-link #{ params[:text] == 'Features' ? 'active' : nil }", data: { turbo_prefetch: false, turbo_stream: true, action: 'click->nav#showLoader' } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Pricing", root_path(text: 'Pricing'), class: "nav-link #{ params[:text] == 'Pricing' ? 'active' : nil }", data: { turbo_prefetch: false, turbo_stream: true, action: 'click->nav#showLoader' } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "About Us", root_path(text: 'About Us'), class: "nav-link #{ params[:text] == 'About Us' ? 'active' : nil }", data: { turbo_prefetch: false, turbo_stream: true, action: 'click->nav#showLoader' } %>
+        </li>
+      </ul>
+    </div>
+  </nav>
 <% end %>
