@@ -3,7 +3,4 @@
   <%= render partial: 'homepage/text', locals: { text: @text } %>
 <% end %>
 
-<%# Button to create todo %>
-<%= link_to 'javascript:void(0)', class: 'btn btn-primary' do %>
-  <i class="fa-solid fa-plus"></i>
-<% end %>
+<%= render partial: 'todos/new' %>

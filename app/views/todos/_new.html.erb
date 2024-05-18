@@ -1,0 +1,4 @@
+<%= form_with url: todos_path, class: 'd-flex gap-2' do |f| %>
+  <%= f.text_field :description, class: 'form-control', placeholder: 'Todo Description' %>
+  <%= f.submit 'Add Todo', class: 'btn btn-primary' %>
+<% end %>
