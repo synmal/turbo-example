@@ -1,12 +1,9 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: %i( edit update destroy )
-
   def index
     sleep 1
     respond_to do |format|
-      todos = Todo.all.order(created_at: :desc)
+      todos = Todo.includes(:todo_items).all.order(created_at: :desc)
 
-      # todos-container
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.update(
@@ -47,36 +44,6 @@ class TodosController < ApplicationController
               locals: { todo: todo }
             ),
             turbo_stream.remove("new_todo")
-          ]
-        end
-      end
-    end
-  end
-
-  def edit
-    respond_to do |f|
-      f.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.update(
-            "todo_#{@todo.id}",
-            partial: 'todos/edit',
-            locals: { todo: @todo }
-          )
-        ]
-      end
-    end
-  end
-
-  def update
-    if @todo.update(todo_params)
-      respond_to do |f|
-        f.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.replace(
-              "todo_#{@todo.id}",
-              partial: 'todos/todo',
-              locals: { todo: @todo }
-            )
           ]
         end
       end
