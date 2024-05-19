@@ -1,6 +1,6 @@
-<%= turbo_frame_tag dom_id(item), class: 'd-flex gap-3 justify-content-between mb-1' do %>
+<%= turbo_frame_tag dom_id(item), class: 'd-flex gap-3 justify-content-between mb-1', data: { controller: 'todo-items', action: 'mouseover->todo-items#showActions mouseout->todo-items#hideActions' } do %>
   <p class="m-0"><%= item.description %></p>
-  <%= content_tag :div, class: 'd-flex gap-2' do %>
+  <%= content_tag :div, class: 'd-none gap-2', data: { todo_items_target: 'action' } do %>
     <span><i class="fa-solid fa-pen-to-square"></i></span>
     <span><i class="fa-solid fa-trash"></i></span>
   <% end %>
