@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "homepage#show"
 
-  resources :todos, only: %i( index new create edit update destroy )
+  resources :todos, only: %i( index new create edit update destroy ) do
+    resources :todo_items, only: %i( edit update destroy ), module: 'todos'
+  end
 end
