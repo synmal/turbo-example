@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   def index
-    sleep 1
+    # sleep 1
     respond_to do |format|
       todos = Todo.includes(:todo_items).all.order(created_at: :desc)
 

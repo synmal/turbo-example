@@ -1,0 +1,10 @@
+<%# Variables: %>
+<%# todo %>
+<%= turbo_frame_tag "new_todo_#{todo.id}_item" do %>
+  <%= form_with url: todo_todo_items_path(todo_id: todo.id), class: 'd-flex gap-2 mt-2', model: todo.todo_items.new, data: { controller: 'form', form_target: 'form', action: 'turbo:submit-end->form#reset' } do |f| %>
+    <%= f.text_field :description, class: 'form-control form-control-sm', placeholder: 'Todo Description' %>
+    <%= button_tag class: 'btn btn-primary btn-sm', type: 'submit' do %>
+      <i class="fa-solid fa-plus"></i>
+    <% end %>
+  <% end %>
+<% end %>

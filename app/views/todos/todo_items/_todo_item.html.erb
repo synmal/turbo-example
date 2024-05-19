@@ -1,0 +1,7 @@
+<%= turbo_frame_tag dom_id(item), class: 'd-flex gap-3 justify-content-between mb-1' do %>
+  <p class="m-0"><%= item.description %></p>
+  <%= content_tag :div, class: 'd-flex gap-2' do %>
+    <span><i class="fa-solid fa-pen-to-square"></i></span>
+    <span><i class="fa-solid fa-trash"></i></span>
+  <% end %>
+<% end %>
