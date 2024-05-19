@@ -4,12 +4,16 @@ export default class extends Controller {
   static targets = [ 'action' ]
 
   showActions() {
-    this.actionTarget.classList.remove('d-none')
-    this.actionTarget.classList.add('d-flex')
+    if (this.hasActionTarget) {
+      this.actionTarget.classList.remove('d-none')
+      this.actionTarget.classList.add('d-flex')
+    }
   }
 
   hideActions() {
-    this.actionTarget.classList.remove('d-flex')
-    this.actionTarget.classList.add('d-none')
+    if (this.hasActionTarget) {
+      this.actionTarget.classList.remove('d-flex')
+      this.actionTarget.classList.add('d-none')
+    }
   }
 }

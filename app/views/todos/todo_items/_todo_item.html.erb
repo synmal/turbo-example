@@ -1,7 +1,9 @@
 <%= turbo_frame_tag dom_id(item), class: 'd-flex gap-3 justify-content-between mb-1', data: { controller: 'todo-items', action: 'mouseover->todo-items#showActions mouseout->todo-items#hideActions' } do %>
   <p class="m-0"><%= item.description %></p>
   <%= content_tag :div, class: 'd-none gap-2', data: { todo_items_target: 'action' } do %>
-    <span><i class="fa-solid fa-pen-to-square"></i></span>
+    <%= link_to edit_todo_todo_item_path(todo_id: item.todo_id, id: item.id), data: { turbo_stream: true }, class: 'text-body' do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+    <% end %>
     <span><i class="fa-solid fa-trash"></i></span>
   <% end %>
 <% end %>
