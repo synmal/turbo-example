@@ -1,16 +1,13 @@
 <%= turbo_frame_tag dom_id(todo), class: 'card' do %>
   <%= content_tag :div, class: 'card-body' do %>
-    <%= content_tag :div, class: 'd-flex gap-2 align-items-center' do %>
-      <div><%= todo.description %></div>
-      <div class="dropdown">
-        <%= link_to "javascript:void(0)", class: 'text-secondary', id: "todo_#{todo.id}_actions", data: { bs_toggle: "dropdown" },  "aria-expanded" => false do %>
-          <i class="fa-solid fa-chevron-down"></i>
+    <% todo.todo_items.each do |item| %>
+      <%= content_tag :div, class: 'd-flex gap-3 justify-content-between' do %>
+        <p class="m-0"><%= item.description %></p>
+        <%= content_tag :div, class: 'd-flex gap-2' do %>
+          <span><i class="fa-solid fa-pen-to-square"></i></span>
+          <span><i class="fa-solid fa-trash"></i></span>
         <% end %>
-        <ul class="dropdown-menu" aria-labelledby="todo_<%= todo.id %>_actions">
-          <li><%= link_to 'Edit', edit_todo_path(id: todo.id), class: 'dropdown-item', data: { turbo_prefetch: false, turbo_stream: true } %></li>
-          <li><%= link_to 'Delete', todo_path(id: todo.id), class: 'dropdown-item', data: { turbo_prefetch: false, turbo_stream: true, turbo_method: :delete } %></li>
-        </ul>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

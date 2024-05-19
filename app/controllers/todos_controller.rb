@@ -96,7 +96,7 @@ class TodosController < ApplicationController
 
   private
     def todo_params
-      params.require(:todo).permit(:description)
+      params.require(:todo).permit(todo_items_attributes: [:id, :description, :_destroy])
     end
 
     def set_todo

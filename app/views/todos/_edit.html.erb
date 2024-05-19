@@ -1,6 +1,10 @@
 <%= content_tag :div, class: 'card-body' do %>
   <%= form_with url: todo_path(id: todo.id), class: 'd-flex gap-2', model: todo do |f| %>
-    <%= f.text_field :description, class: 'form-control', placeholder: 'Todo Description' %>
-    <%= f.submit 'Update', class: 'btn btn-primary' %>
+    <%= f.fields_for :todo_items, todo.todo_items do |ff| %>
+        <%= ff.text_field :description, class: 'form-control', placeholder: 'Todo Description' %>
+    <% end %>
+    <%= button_tag class: 'btn btn-primary', type: 'submit' do %>
+      <i class="fa-solid fa-plus"></i>
+    <% end %>
   <% end %>
 <% end %>
