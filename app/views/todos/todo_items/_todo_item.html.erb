@@ -4,6 +4,8 @@
     <%= link_to edit_todo_todo_item_path(todo_id: item.todo_id, id: item.id), data: { turbo_stream: true }, class: 'text-body' do %>
       <i class="fa-solid fa-pen-to-square"></i>
     <% end %>
-    <span><i class="fa-solid fa-trash"></i></span>
+    <%= link_to todo_todo_item_path(todo_id: item.todo_id, id: item.id), data: { turbo_stream: true, turbo_method: :delete }, class: 'text-body' do %>
+      <i class="fa-solid fa-trash"></i>
+    <% end %>
   <% end %>
 <% end %>

@@ -1,6 +1,6 @@
 class Todos::TodoItemsController < ApplicationController
   before_action :set_todo
-  before_action :set_todo_item, only: %i( edit update )
+  before_action :set_todo_item, only: %i( edit update destroy )
 
   def new
     respond_to do |format|
@@ -61,6 +61,16 @@ class Todos::TodoItemsController < ApplicationController
             )
           ]
         end
+      end
+    end
+  end
+
+  def destroy
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove("todo_item_#{@todo_item.id}")
+        ]
       end
     end
   end
