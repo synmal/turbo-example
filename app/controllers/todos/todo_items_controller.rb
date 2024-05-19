@@ -1,6 +1,6 @@
 class Todos::TodoItemsController < ApplicationController
   before_action :set_todo
-  before_action :set_todo_item, only: %i( edit update destroy )
+  before_action :set_todo_item, only: %i( show edit update destroy )
 
   def new
     respond_to do |format|
@@ -10,6 +10,20 @@ class Todos::TodoItemsController < ApplicationController
             "todo_#{@todo.id}_todo_items",
             partial: 'todos/todo_items/new',
             locals: { todo: @todo }
+          )
+        ]
+      end
+    end
+  end
+
+  def show
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace(
+            "todo_item_#{@todo_item.id}",
+            partial: 'todos/todo_items/todo_item',
+            locals: { item: @todo_item }
           )
         ]
       end
@@ -54,7 +68,7 @@ class Todos::TodoItemsController < ApplicationController
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.update(
+            turbo_stream.replace(
               "todo_item_#{@todo_item.id}",
               partial: 'todos/todo_items/todo_item',
               locals: { item: @todo_item }
@@ -66,11 +80,22 @@ class Todos::TodoItemsController < ApplicationController
   end
 
   def destroy
+    @todo_item.destroy
+    @todo.reload
+
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.remove("todo_item_#{@todo_item.id}")
-        ]
+        if @todo.todo_items.count <= 0
+          @todo.destroy
+
+          render turbo_stream: [
+            turbo_stream.remove("todo_#{@todo.id}")
+          ]
+        else
+          render turbo_stream: [
+            turbo_stream.remove("todo_item_#{@todo_item.id}")
+          ]
+        end
       end
     end
   end

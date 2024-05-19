@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ 'action' ]
+  static targets = [ 'action', 'removable' ]
 
   showActions() {
     if (this.hasActionTarget) {
@@ -15,5 +15,9 @@ export default class extends Controller {
       this.actionTarget.classList.remove('d-flex')
       this.actionTarget.classList.add('d-none')
     }
+  }
+
+  removeElement() {
+    this.removableTarget.remove()
   }
 }

@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "navbar", data: { controller: 'nav', nav_loader_outlet: '.homepage--text' } do %>
   <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
-    <%= link_to "Todo", root_path, class: 'navbar-brand', data: { turbo: false, turbo_prefetch: false, turbo_stream: false, action: 'click->nav#showLoader' } %>
+    <%= link_to "Todo", root_path, class: 'navbar-brand', data: { turbo: false } %>
   </nav>
 <% end %>
