@@ -45,7 +45,8 @@ class TodosController < ApplicationController
               "todos-container",
               partial: 'todos/todo',
               locals: { todo: todo }
-            )
+            ),
+            turbo_stream.remove("new_todo")
           ]
         end
       end

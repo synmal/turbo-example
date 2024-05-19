@@ -1,13 +1,18 @@
-<%= turbo_frame_tag dom_id(todo), class: 'card' do %>
+<%= turbo_frame_tag dom_id(todo), class: 'card col-md-4' do %>
   <%= content_tag :div, class: 'card-body' do %>
-    <% todo.todo_items.each do |item| %>
-      <%= content_tag :div, class: 'd-flex gap-3 justify-content-between' do %>
-        <p class="m-0"><%= item.description %></p>
-        <%= content_tag :div, class: 'd-flex gap-2' do %>
-          <span><i class="fa-solid fa-pen-to-square"></i></span>
-          <span><i class="fa-solid fa-trash"></i></span>
+    <%= content_tag :div do %>
+      <% todo.todo_items.each do |item| %>
+        <%= content_tag :div, class: 'd-flex gap-3 justify-content-between' do %>
+          <p class="m-0"><%= item.description %></p>
+          <%= content_tag :div, class: 'd-flex gap-2' do %>
+            <span><i class="fa-solid fa-pen-to-square"></i></span>
+            <span><i class="fa-solid fa-trash"></i></span>
+          <% end %>
         <% end %>
       <% end %>
+    <% end %>
+    <%= link_to 'javascript:void(0)', class: 'btn btn-primary btn-sm mt-2' do %>
+      <i class="fa-solid fa-plus"></i>
     <% end %>
   <% end %>
 <% end %>

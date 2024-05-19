@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "new_todo", class: 'card' do %>
+<%= turbo_frame_tag "new_todo", class: 'card col-md-4' do %>
   <%= content_tag :div, class: 'card-body' do %>
     <%= form_with url: todos_path, class: 'd-flex gap-2', model: Todo.new, data: { controller: 'form', form_target: 'form', action: 'turbo:submit-end->form#reset' } do |f| %>
       <%= f.fields_for :todo_items, TodoItem.new do |ff| %>
