@@ -1,11 +1,16 @@
-<%= turbo_frame_tag "new_todo", class: 'card col-md-4' do %>
+<%= turbo_frame_tag "new_todo", class: 'card col-md-4', data: { controller: 'todo-items', todo_items_target: 'removable' } do %>
   <%= content_tag :div, class: 'card-body' do %>
     <%= form_with url: todos_path, class: 'd-flex gap-2', model: Todo.new, data: { controller: 'form', form_target: 'form', action: 'turbo:submit-end->form#reset' } do |f| %>
       <%= f.fields_for :todo_items, TodoItem.new do |ff| %>
         <%= ff.text_field :description, class: 'form-control', placeholder: 'Todo Description' %>
       <% end %>
-      <%= button_tag class: 'btn btn-primary', type: 'submit' do %>
-        <i class="fa-solid fa-plus"></i>
+      <%= content_tag :div, class: 'd-flex gap-1' do %>
+        <%= button_tag class: 'btn btn-primary btn-sm', type: 'submit' do %>
+          <i class="fa-solid fa-plus"></i>
+        <% end %>
+        <%= button_tag class: 'btn btn-danger btn-sm', type: 'button', data: { action: 'click->todo-items#removeElement' } do %>
+          <i class="fa-solid fa-xmark"></i>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
